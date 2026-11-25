@@ -20,7 +20,7 @@ Write as if pointing at something concrete that both you and the reader can insp
 
 ## 3. Global Punctuation Habit
 
-As this author's default across papers, blogs, and rebuttals, write newly drafted prose without colons, semicolons, or em-dashes, and omit trailing colons in headings.
+As this author's default across papers, blogs, and rebuttals, **never use em-dashes (`—` or Chinese `——`)** in prose, headings, titles, captions, or tables, and write newly drafted prose without colons, semicolons, or trailing colons in headings.
 
 - Split independent claims into separate sentences with periods.
 - Connect closely related clauses with ordinary conjunctions (`and`, `but`, `yet`, `however`, `while`, `because`, `so`) rather than punctuation shortcuts.

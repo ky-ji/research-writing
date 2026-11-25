@@ -12,6 +12,7 @@ Go through every box before publishing. Report failures to the user with the fix
 - [ ] The hook is concrete (one scene or one number) rather than background history.
 - [ ] Competing explanations and confounds are addressed where the claim is made.
 - [ ] Multi-model comparisons are framed by architectural paradigm rather than bare checkpoint names, stating both what is invariant and what varies systematically along the structural axis.
+- [ ] No standalone *Limitations* section (scope caveats live concisely inline next to claims, and experimental protocol details live in `<details>`).
 - [ ] Closing answers the title question in plain words with no duplicate recap list.
 
 ## Prose
@@ -23,7 +24,7 @@ Go through every box before publishing. Report failures to the user with the fix
 - [ ] No self-praising adjectives (`striking`, `remarkable`, `dramatic`, `zero-loophole`, `best-paper`).
 - [ ] No hedge stacks (`may potentially suggest`) and no throat-clearing (`It is worth noting that`).
 - [ ] Active voice and concrete subjects ("the head contracts" instead of "contraction is observed").
-- [ ] Global punctuation habit followed in running prose (no colons, semicolons, or em-dashes in newly written prose, and no trailing colons in headings, preserving code/KaTeX/BibTeX syntax).
+- [ ] Global punctuation habit followed everywhere: zero em-dashes (`—` or `——`) in prose, headings, titles, captions, or tables, and no colons, semicolons, or trailing colons in newly drafted prose/headings (preserve code/KaTeX/BibTeX syntax).
 - [ ] Transitions are questions or short bridges rather than "Next, we...".
 - [ ] Word count cut by at least 25 percent in the edit pass compared to the first draft.
 
@@ -41,7 +42,7 @@ Go through every box before publishing. Report failures to the user with the fix
 - [ ] Every number matches the source JSON or logs.
 - [ ] Rounding is identical across text, figures, and tables.
 - [ ] N, seeds, and environment are stated in captions or `<details>`.
-- [ ] Oracle, upper-bound, or simulation-only caveats are stated next to the claim and in Limitations.
+- [ ] Oracle, upper-bound, or simulation-only caveats are stated concisely inline next to the claim (no standalone *Limitations* section).
 - [ ] Claims do not exceed evidence (for example, "matches" versus "beats" given N = 16).
 
 ## Visual And HTML

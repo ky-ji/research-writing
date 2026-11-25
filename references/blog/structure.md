@@ -4,7 +4,7 @@
 
 | # | Section | Job | Length |
 |---|---|---|---|
-| 0 | Title + subtitle | Title names the lens, and subtitle asks the question the post answers. | — |
+| 0 | Title + subtitle | Title names the lens, and subtitle asks the question the post answers. | - |
 | 0 | **TL;DR** | One-sentence answer followed by 3 to 4 bullets, each pairing one claim with one supporting number. | At most 90 words |
 | 0 | Hero figure | The idea as one picture (schematic or real frames). Make it interactive only when toggling adds understanding. | 1 figure |
 | 1 | The puzzle or hook | One concrete observation that makes the question unavoidable, ending with the question as a pull quote. | 2 to 3 paragraphs + Fig |
@@ -12,9 +12,8 @@
 | 3 | Setup | Frame models by **architectural paradigm** along one structural axis (checkpoints as instances) plus a compact metric glossary. Put protocol details in `<details>`. | Short |
 | 4...k | Finding 1...n | Eyebrow "Finding i", claim heading, one-sentence claim callout, evidence (at most 1 figure and 1 table), one surprise or caveat, and a cross-paradigm synthesis (what stays invariant versus what shifts with architecture). | 3 to 6 paragraphs each |
 | k+1 | Implications | What changes for practitioners in 2 to 4 concrete, actionable lessons (cards). | Short |
-| k+2 | Limitations | At most 3 bullets, each a bold label and one sentence. Full protocol stays in `<details>`. | Short |
-| k+3 | Closing | One paragraph answering the title question in plain words with the broader stake and no new results. | 1 paragraph |
-| — | Citation | BibTeX block. | — |
+| k+2 | Closing | One paragraph answering the title question in plain words with the broader stake and no new results. Put the collapsible `<details>` experimental protocol here (do not write a standalone *Limitations* section). | 1 paragraph |
+| - | Citation | BibTeX block. | - |
 
 For tutorial or survey posts, replace Framing and Findings with Intuition, Formalism, Worked example, Variants, and When it fails.
 
