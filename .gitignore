@@ -1,0 +1,8 @@
+# Private local writing archive (OpenReview records, personal draft samples, backups).
+/records/
+
+.DS_Store
+__pycache__/
+*.pyc
+*.swp
+*.swo

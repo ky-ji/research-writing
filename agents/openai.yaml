@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Writing"
+  short_description: "Write clear, evidence-backed AI research papers, blogs, and rebuttals"
+  default_prompt: "Use $research-writing to plan, draft, revise, or review this research paper, blog post, or rebuttal with clear logic, natural concise prose, and accurate evidence."
