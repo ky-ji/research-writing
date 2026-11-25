@@ -22,7 +22,7 @@ A private map can keep the argument focused.
 |---|---|---|---|
 | What needs to be resolved? | What should the reader know first? | Which result or explanation answers it? | Why does it resolve this concern, and what changes? |
 
-Give the clearest answer and most space to concerns that affect the assessment of the contribution. Preserve the existing W/Q order when requested. Merge related items when one argument answers them together, and retain every original label so coverage stays visible.
+Give the clearest answer and most space to concerns that affect the assessment of the contribution. Follow the [workflow](workflow.md) for the default W/Q order. Merge related items when one argument answers them together, and retain every original label so coverage stays visible.
 
 ## 3. Build a complete argument
 

@@ -17,9 +17,19 @@ from typing import Any
 
 
 DEFAULT_SECTION_PATTERN = (
-    r"^(?P<marks>#{1,6})\s+"
+    r"^(?P<marks>#{1,6})[ \t]+"
     r"(?P<label>(?:R\d+\b.*|Reviewer\b.*|AC\b.*|Area Chair\b.*|"
     r"Meta[- ]Review\b.*|Response to the (?:Area Chair|Meta[- ]Review).*))$"
+)
+ORIGINAL_REVIEW_RE = re.compile(
+    r"^<!-- BEGIN ORIGINAL REVIEW (?P<id>[A-Za-z0-9_-]+) -->\n"
+    r".*?^<!-- END ORIGINAL REVIEW (?P=id) -->$",
+    re.MULTILINE | re.DOTALL,
+)
+RESPONSE_BLOCK_RE = re.compile(
+    r"^<!-- BEGIN RESPONSE (?P<id>[A-Za-z0-9_-]+) -->\n"
+    r"(?P<body>.*?)^<!-- END RESPONSE (?P=id) -->$",
+    re.MULTILINE | re.DOTALL,
 )
 
 BOUNDARY_RE = re.compile(
@@ -103,6 +113,9 @@ def reviewer_key(label: str) -> str:
     match = re.match(r"R\d+", label, re.IGNORECASE)
     if match:
         return match.group(0).upper()
+    match = re.fullmatch(r"Reviewer\s+[A-Za-z0-9_-]+\s+\((R\d+)\)\s*", label, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
     if re.search(r"meta|area chair|\bAC\b", label, re.IGNORECASE):
         return "AC"
     return label.strip()
@@ -110,6 +123,8 @@ def reviewer_key(label: str) -> str:
 
 def split_sections(text: str, pattern: str) -> list[dict[str, Any]]:
     regex = re.compile(pattern, re.IGNORECASE | re.MULTILINE)
+    # Preserve source line numbers while hiding headings from the original reviews.
+    text = ORIGINAL_REVIEW_RE.sub(lambda match: "\n" * match.group(0).count("\n"), text)
     matches = list(regex.finditer(text))
     sections: list[dict[str, Any]] = []
     for index, match in enumerate(matches):
@@ -119,13 +134,26 @@ def split_sections(text: str, pattern: str) -> list[dict[str, Any]]:
             continue
         end = matches[index + 1].start() if index + 1 < len(matches) else len(text)
         marks = match.groupdict().get("marks") or re.match(r"#+", match.group(0)).group(0)
+        start = match.end()
+        body = text[start:end]
+        response = RESPONSE_BLOCK_RE.search(body)
+        if response:
+            start += response.start("body")
+            body = response.group("body")
+        leading_blank_lines = re.match(r"(?:[ \t]*\n)*", body).end()
+        start += leading_blank_lines
+        body = body[leading_blank_lines:]
+        if response:
+            # Verbatim reviewer excerpts are shown inline in a workbench.
+            body = re.sub(r"^[ \t]*>[^\n]*", "", body, flags=re.MULTILINE)
         sections.append(
             {
                 "label": label.strip(),
                 "key": key,
                 "line": line_number(text, match.start()),
                 "heading_depth": len(marks),
-                "text": text[match.end() : end].strip(),
+                "text_line": line_number(text, start),
+                "text": body.rstrip(),
             }
         )
     return sections
@@ -136,12 +164,13 @@ def reviewer_opening(section_text: str) -> str:
     for line in section_text.splitlines():
         if BOUNDARY_RE.match(line):
             break
-        if line.strip():
-            lines.append(line.strip())
+        opening_line = line.strip()
+        if opening_line and opening_line != "---":
+            lines.append(opening_line)
     return clean_markdown(" ".join(lines))
 
 
-def answer_units(section_text: str, section_line: int) -> list[dict[str, Any]]:
+def answer_units(section_text: str, text_line: int) -> list[dict[str, Any]]:
     lines = section_text.splitlines()
     units: list[dict[str, Any]] = []
     starts = [index for index, line in enumerate(lines) if ANSWER_START_RE.match(line)]
@@ -173,7 +202,7 @@ def answer_units(section_text: str, section_line: int) -> list[dict[str, Any]]:
             style = "full_opening_bold"
         units.append(
             {
-                "line": section_line + start + 1,
+                "line": text_line + start,
                 "style": style,
                 "opening": sentences[0][:240] if sentences else prose[:240],
                 "closing": sentences[-1][:240] if sentences else prose[-240:],
@@ -225,9 +254,7 @@ def variant_observations(
                 used[variant].append(
                     {
                         "reviewer": section["key"],
-                        "line": section["line"]
-                        + section["text"].count("\n", 0, start)
-                        + 1,
+                        "line": section["text_line"] + section["text"].count("\n", 0, start),
                     }
                 )
                 reviewers.add(section["key"])
@@ -254,7 +281,7 @@ def numeric_observations(sections: list[dict[str, Any]]) -> list[dict[str, Any]]
             values[value][unit].append(
                 {
                     "reviewer": section["key"],
-                    "line": section["line"] + section["text"].count("\n", 0, match.start()) + 1,
+                    "line": section["text_line"] + section["text"].count("\n", 0, match.start()),
                     "signed": bool(match.group("sign")),
                 }
             )
@@ -378,7 +405,7 @@ def build_report(args: argparse.Namespace) -> dict[str, Any]:
 
     profiles: list[dict[str, Any]] = []
     for section in sections:
-        answers = answer_units(section["text"], section["line"])
+        answers = answer_units(section["text"], section["text_line"])
         opening = reviewer_opening(section["text"])
         profiles.append(
             {

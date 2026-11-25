@@ -54,19 +54,16 @@ research-writing/
 
 ## Cross-Agent Installation
 
-Maintain **one canonical local checkout** and symlink it into each agent's discovery directory so one `git pull` or rule refinement updates every agent at once.
+Maintain one checkout at `~/.agents/skills/research-writing`. Codex and Gemini CLI discover that directory as a user skill. Create links in the Claude Code and Cursor personal skills directories so their local clients can load the same checkout.
 
 ```bash
-# 1. Clone once into the shared skills store
+mkdir -p ~/.agents/skills ~/.claude/skills ~/.cursor/skills
 git clone https://github.com/ky-ji/research-writing.git ~/.agents/skills/research-writing
-
-# 2. Symlink into each agent you use
-ln -s ../../../.agents/skills/research-writing ~/.gemini/config/skills/research-writing
 ln -s ../../.agents/skills/research-writing ~/.claude/skills/research-writing
-ln -s ../../.agents/skills/research-writing ~/.codex/skills/research-writing
+ln -s ../../.agents/skills/research-writing ~/.cursor/skills/research-writing
 ```
 
-To update everywhere later, run `git pull` inside `~/.agents/skills/research-writing`.
+Edit rules in the shared checkout so every linked agent reads the same changes. When the author confirms a standing preference, update the relevant mode or shared rule there. Use a new session to verify changes in each client. Pull upstream changes from the same checkout when needed.
 
 ## Helper Scripts
 
