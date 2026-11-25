@@ -12,6 +12,7 @@ All shared core rules in `SKILL.md` apply, including evidence integrity, canonic
 
 - Start from the user's current draft, supplied evidence, requested language, template, and edit boundary. Keep results, comparison identities, units, quotations, and completed versus planned work accurate. Resolve a material source conflict locally or ask a focused question while continuing unaffected writing.
 - Lead with the substantive answer. Follow with the mechanism or distinction needed to understand it, the decisive result, and its meaning for this concern. Choose the pieces and order that make the argument clearest.
+- Keep weaknesses in their original numerical order within each reviewer reply. Place a combined weakness and question at the weakness position with its W label first, then place standalone questions in numerical order after the weaknesses. Split a merge if it would disrupt the order of weaknesses. Update answer numbers and cross-references after moving blocks.
 - Write with calm confidence. Explain what the method achieves and how the evidence answers the question. Acknowledge a concrete correction directly. Include qualifications when they change the answer, and keep the author's supported persuasive strength.
 - Keep each reviewer reply independently understandable. Repeat a decisive fact when another reviewer needs it, using the same name, value, unit, and interpretation.
 

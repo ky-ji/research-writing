@@ -14,7 +14,7 @@ Every research claim must stay anchored to verified source artifacts, and every 
 
 - **Verify against sources.** Match every reported value to its source JSON, log, script, or table.
 - **Consistent presentation.** Keep the same comparison baseline, unit, rounding precision, and aggregation method (for example, task-weighted versus episode-weighted average) across prose, tables, figures, and reviewer replies.
-- **Percentages versus percentage points.** Preserve the exact distinction between relative percentages and absolute percentage-point differences (`percentage points` or `pp`, chosen consistently).
+- **Absolute and relative changes.** Preserve the distinction between an absolute change in a rate and a change relative to the starting value. Follow the active mode for how to express the difference.
 - **Make every number's referent visible.** Attach each value to its setting, metric, and sample size where interpretation depends on it.
 - **Grammatical references.** Integrate figure, table, and section references smoothly into sentences (such as "as shown in Table 2") using one consistent convention throughout the document.
 

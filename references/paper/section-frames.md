@@ -10,7 +10,9 @@ Use the length and sentence structure the argument needs. Pair quality with cost
 
 ## Introduction
 
-Expand the abstract's logic consistently. Establish the significance of the problem, the relevant prior practice and limitation, and the reasoning behind the insight before explaining the method. Give each paragraph a clear task and keep the method overview concise enough to serve the introduction.
+Plan backward from the contribution. Identify the specific difficulty it resolves, the closest prior approaches that encounter it, and what the proposed insight changes. Explain the technical reason for the difficulty when the available sources support it. For a new task without direct precedents, define the concrete challenges and draw on adjacent work where it helps the reader understand them.
+
+Draft forward from the task and why it matters to the relevant technical challenge, then explain the insight, the method that realizes it, and the resulting contribution. Follow the logic of the abstract and give each paragraph a clear job. Keep the method overview concise enough to serve the introduction.
 
 Summarize shared assumptions rather than collecting citations or forcing a taxonomy. A figure, concrete scenario, or number can provide the necessary context when available.
 
@@ -26,9 +28,11 @@ Avoid unsupported claims that no one has studied the problem. A paragraph need n
 
 ## Method
 
+Before drafting, trace each substantive design from its inputs through its operations to its outputs. Identify which later steps use those outputs. Use a working pipeline sketch when it clarifies dependencies or helps choose the order of the subsections.
+
 Open with an overview of the actual approach and its relationship to the insight. Define the problem and quantities needed to understand the design. Explain mechanisms in an order that makes their dependencies clear.
 
-For each substantive design, explain its purpose, actual operation, and consequence. Include a naive alternative, failure analysis, or additional mechanism when it materially explains the choice. Let the method determine the number of subsections.
+For each substantive design, explain the problem it addresses, how it operates, and what advantage or consequence follows. Ground the consequence in the mechanism, analysis, or measured result that supports it. Include a simple alternative or a failure analysis when the comparison helps explain the design choice. Let the method determine the number of subsections.
 
 ### Equations And Pipelines
 
@@ -36,7 +40,9 @@ Explain why a quantity matters before formalizing it and state an equation's rol
 
 ## Experiments
 
-Start from the questions each experiment answers and the claims it can support. Explain benchmarks, baselines, metrics, hardware, training or inference settings, and the sample sizes needed to interpret the comparison. Compression must not remove important settings or sample counts.
+Start from the principal empirical claims and identify the comparison, control, or evaluation setting needed to assess each one. Include the strongest relevant baselines and make the comparison protocol explicit. State what is held fixed and what changes. When the claim depends on coupled choices, consider ablations that can distinguish the effect of each choice from their interaction. Report the harder conditions and failure cases that define the scope of a generalization claim.
+
+Explain the benchmarks, metrics, hardware, training or inference settings, and sample sizes needed to interpret each comparison. Preserve important settings and sample counts when shortening the text.
 
 When comparing multiple models, organize them by canonical architectural or methodological paradigm along a clear axis (naming checkpoints as representative instances) and state both invariants and systematic differences.
 
